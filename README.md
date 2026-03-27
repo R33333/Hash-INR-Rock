@@ -1,6 +1,6 @@
 # INR for Digital Rock Compression
 
-Code for the paper: **Hash-Encoded Implicit Neural Representations for Efficient Compression of Large-Scale Digital Rock CT Images** (*Computers & Geosciences*, 2026)
+Code for the paper: **Hash-Encoded Implicit Neural Representations for Efficient Compression of Large-Scale Digital Rock CT Images** 
 
 A compact neural network is trained to map spatial coordinates to voxel labels. The trained weights serve as the compressed file. Because the mapping is continuous, the same model supports arbitrary-resolution queries (super-resolution) at no additional training cost.
 
