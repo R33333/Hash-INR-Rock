@@ -1,14 +1,9 @@
 # Hash-INR-Rock
 
-Code for the paper: **Hash-Encoded Implicit Neural Representations for Efficient Compression of Large-Scale Digital Rock CT Images** (*Computers & Geosciences*, 2026)
+Code for the paper: **Hash-Encoded Implicit Neural Representations for Efficient Compression of Large-Scale Digital Rock CT Images** 
 
 A compact neural network is trained to map spatial coordinates to voxel labels. The trained weights serve as the compressed file. Because the mapping is continuous, the same model also supports arbitrary-resolution queries (super-resolution).
 
-**Contact:** renyong@xsyu.edu.cn, +8618821622895  
-**Language:** Python  
-**Software:** Python 3.8+; PyTorch 2.x; NumPy; Matplotlib; Jupyter Notebook  
-**Hardware:** AMD EPYC 7K62 48-core CPU; NVIDIA RTX 4090 GPU recommended; 64 GB RAM or higher; 50 GB free disk space  
-**Program size:** ~114 KB (source code only)
 
 ## Results
 
@@ -92,6 +87,8 @@ python eval_sr_metrics.py \
 ## Data
 
 Experiments use the [MRCCM dataset](https://www.doi.org/10.17612/3t36-q704) (Alqahtani et al., 2021) from the Digital Porous Media Portal, including the Indiana Limestone (ILS) and Middle Eastern Carbonate (MEC) samples.
+
+Alqahtani, N., Mostaghimi, P., Armstrong, R. (2021, May 19). A Multi-Resolution Complex Carbonates Micro-CT Dataset (MRCCM) [Dataset]. Digital Porous Media Portal.
 
 ## Citation
 
