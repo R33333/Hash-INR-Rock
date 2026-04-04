@@ -1,28 +1,44 @@
-# INR for Digital Rock Compression
+# Hash-INR-Rock
 
-Code for the paper: **Hash-Encoded Implicit Neural Representations for Efficient Compression of Large-Scale Digital Rock CT Images** 
+Code for the paper: **Hash-Encoded Implicit Neural Representations for Efficient Compression of Large-Scale Digital Rock CT Images** (*Computers & Geosciences*, 2026)
 
-A compact neural network is trained to map spatial coordinates to voxel labels. The trained weights serve as the compressed file. Because the mapping is continuous, the same model supports arbitrary-resolution queries (super-resolution) at no additional training cost.
+A compact neural network is trained to map spatial coordinates to voxel labels. The trained weights serve as the compressed file. Because the mapping is continuous, the same model also supports arbitrary-resolution queries (super-resolution).
+
+**Contact:** renyong@xsyu.edu.cn, +8618821622895  
+**Language:** Python  
+**Software:** Python 3.8+; PyTorch 2.x; NumPy; Matplotlib; Jupyter Notebook  
+**Hardware:** AMD EPYC 7K62 48-core CPU; NVIDIA RTX 4090 GPU recommended; 64 GB RAM or higher; 50 GB free disk space  
+**Program size:** ~114 KB (source code only)
 
 ## Results
 
 | Config | Model Size | Compression Ratio | Label Accuracy | Porosity Error |
-|--------|-----------|-------------------|----------------|----------------|
-| Tiny   | 16 MB     | 976×              | 90.9%          | 4.69%          |
-| Small  | 32 MB     | 489×              | 92.4%          | 3.49%          |
-| Medium | 128 MB    | 122×              | 94.8%          | 1.94%          |
-| Large  | 256 MB    | 61×               | 95.7%          | 1.42%          |
+|--------|-----------:|------------------:|---------------:|---------------:|
+| Tiny   | 16 MB      | 976×              | 90.9%          | 4.69%          |
+| Small  | 32 MB      | 489×              | 92.4%          | 3.49%          |
+| Medium | 128 MB     | 122×              | 94.8%          | 1.94%          |
+| Large  | 256 MB     | 61×               | 95.7%          | 1.42%          |
 
 Dataset: ILS carbonate rock, 15.29 GB original size.
 
-## Requirements
+## Installation
 
 ```bash
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
 pip install -r requirements.txt
 ```
 
-Recommended: NVIDIA GPU with 24 GB VRAM. For large datasets (>15 GB), 64 GB+ RAM is required.
+## Quick Test
+
+A tiny example dataset is provided in `test_data/`.
+
+Run the smoke test:
+
+```bash
+python quick_test.py
+```
+
+This test loads the toy segmented volume, checks basic data processing, and runs a small model forward pass on CPU.
 
 ## Usage
 
@@ -36,18 +52,6 @@ python train_fast.py \
     --log2_hashmap_size 20 \
     --output output/ils_compression
 ```
-
-Key arguments:
-
-| Argument | Default | Description |
-|----------|---------|-------------|
-| `--data` | — | Path to `.npy` segmented volume |
-| `--epochs` | 100 | Training epochs |
-| `--batch_size` | 1048576 | Coordinates per batch |
-| `--log2_hashmap_size` | 20 | Hash table size (controls compression ratio) |
-| `--output` | `output/` | Output directory |
-
-Increase `--log2_hashmap_size` for higher accuracy (lower compression); decrease for higher compression.
 
 ### Super-Resolution
 
@@ -73,19 +77,21 @@ python eval_sr_metrics.py \
 
 ```
 ├── model.py              # Hash encoding + MLP architecture
-├── train_fast.py         # Compression training (large dataset support)
+├── train_fast.py         # Compression training
 ├── train_sr.py           # Super-resolution training
-├── eval_sr_metrics.py    # SR evaluation against baselines
-├── metrics.py            # PSNR, SSIM, porosity calculation
-├── dataset.py            # Data loading (supports .npy, .am, .mat)
+├── eval_sr_metrics.py    # SR evaluation
+├── dataset.py            # Data loading
 ├── am_loader.py          # Avizo AM format reader
 ├── preprocess_data.py    # Data preprocessing utilities
+├── metrics.py            # PSNR, SSIM, porosity calculation
+├── quick_test.py         # Quick runnable example
+├── test_data/            # Tiny example dataset
 └── requirements.txt      # Dependencies
 ```
 
 ## Data
 
-Experiments use the [MRCCM dataset](https://www.doi.org/10.17612/3t36-q704) (Alqahtani et al., 2021) from the Digital Porous Media Portal, which includes the Indiana Limestone (ILS) and Middle Eastern Carbonate (MEC) samples.
+Experiments use the [MRCCM dataset](https://www.doi.org/10.17612/3t36-q704) (Alqahtani et al., 2021) from the Digital Porous Media Portal, including the Indiana Limestone (ILS) and Middle Eastern Carbonate (MEC) samples.
 
 ## Citation
 
