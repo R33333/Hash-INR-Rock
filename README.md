@@ -1,9 +1,8 @@
 # Hash-INR-Rock
 
-Code for the paper: **Hash-Encoded Implicit Neural Representations for Efficient Compression of Large-Scale Digital Rock CT Images** 
+Code for the paper: **Hash-Encoded Implicit Neural Representations for Efficient Compression of Large-Scale Digital Rock CT Images**
 
 A compact neural network is trained to map spatial coordinates to voxel labels. The trained weights serve as the compressed file. Because the mapping is continuous, the same model also supports arbitrary-resolution queries (super-resolution).
-
 
 ## Results
 
@@ -25,7 +24,11 @@ pip install -r requirements.txt
 
 ## Quick Test
 
-A tiny example dataset is provided in `test_data/`.
+Example datasets are provided in `test_data/`:
+
+- `toy_hr_seg.npy` / `toy_lr_seg_2x.npy`: tiny smoke-test pair
+- `medium_hr_seg.npy` / `medium_lr_seg_2x.npy`: about 10 MB HR volume
+- `large_hr_seg.npy` / `large_lr_seg_2x.npy`: larger example for a more realistic run
 
 Run the smoke test:
 
